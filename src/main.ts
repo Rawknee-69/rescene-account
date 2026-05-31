@@ -29,6 +29,7 @@ function corsOrigin(
 
 const fastify = Fastify({
   logger: isProd ? true : { transport: { target: 'pino-pretty' } },
+  trustProxy: isProd,
 });
 
 await fastify.register(fastifyCors, {
@@ -47,5 +48,8 @@ await fastify.register(progressRoutes, { prefix: '/v1/progress' });
 await fastify.register(meRoutes, { prefix: '/v1/me' });
 
 const port = config.port;
-await fastify.listen({ port, host: '0.0.0.0' });
-fastify.log.info(`rescene-account listening on :${port}`);
+await fastify.listen({
+  port,
+  host: '0.0.0.0',
+  listenTextResolver: (address) => `rescene-account ready at ${address}`,
+});
