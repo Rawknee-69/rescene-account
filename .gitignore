@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.env
+*.log
+.DS_Store
+data/anime-list-full.json
+supabase/.temp/
+supabase/.branches/
+src/types/supabase.generated.ts
+.temp
+
+.env.*
+.env
