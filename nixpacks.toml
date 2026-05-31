@@ -1,0 +1,17 @@
+# Coolify / Railway Nixpacks — Node 18 was removed from nixpkgs (EOL).
+providers = ["bun"]
+
+[variables]
+NODE_VERSION = "22"
+
+[phases.setup]
+nixPkgs = ["nodejs_22", "bun"]
+
+[phases.install]
+cmds = ["bun install"]
+
+[phases.build]
+cmds = ["bun run db:generate"]
+
+[start]
+cmd = "bun run start"
