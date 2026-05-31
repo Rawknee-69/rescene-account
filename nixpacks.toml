@@ -1,17 +1,18 @@
-# Coolify / Railway Nixpacks — Node 18 was removed from nixpkgs (EOL).
-providers = ["bun"]
+# Coolify Nixpacks: no standalone "bun" provider; bun.lock otherwise pins an EOL Node 18 nixpkgs archive.
+providers = ["node"]
 
 [variables]
-NODE_VERSION = "22"
+NIXPACKS_NODE_VERSION = "22"
 
 [phases.setup]
-nixPkgs = ["nodejs_22", "bun"]
+# Node 22 nixpkgs snapshot (see nixpacks AVAILABLE_NODE_VERSIONS for 22)
+nixpkgsArchive = "e6f23dc08d3624daab7094b701aa3954923c6bbb"
 
 [phases.install]
-cmds = ["bun install"]
+cmds = ["npm ci"]
 
 [phases.build]
-cmds = ["bun run db:generate"]
+cmds = ["npm run db:generate"]
 
 [start]
-cmd = "bun run start"
+cmd = "npm run start"
